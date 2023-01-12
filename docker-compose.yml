@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  product:
+    build: ./product
+    container_name: ecomm-product
+
+  account:
+    build: ./account
+    container_name: ecomm-account
