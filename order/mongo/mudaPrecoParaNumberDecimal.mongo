@@ -1,0 +1,24 @@
+db.orders.aggregate([
+    {
+        $project: {
+            cpfCliente: "$cpfCliente",
+            dataDoPedido: "$dataDoPedido",
+            enderecoEntrega: "$enderecoEntrega",
+            itens: {
+                $map: {
+                    input: "$itens",
+                    as: "item",
+                    in: { 
+                        produto: "$$item.produto",
+                        quantidade: "$$item.quantidade",
+                        precoUnitario: {$toDecimal: "$$item.precoUnitario"}, 
+                        desconto: {$toDecimal: "$$item.desconto"}
+                    }
+                }
+            }
+        }
+    },
+    {
+        $out: "orders2"
+    }
+])

@@ -5,9 +5,9 @@ export default function createUserUseCase (name, email, password){
 
     const user = {
         id: accounts.length +1,
-        name: name,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
         createdDate: currentDate
     }
     accounts.push(user);

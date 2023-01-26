@@ -2,13 +2,13 @@ import { accounts } from "./createUserAccount.js";
 
 export default function createUserAddress (id, logradouro, numero, complemento, bairro, cep, cidade, uf){
     const address = {
-        logradouro: logradouro,
-        numero: numero,
-        complemento: complemento,
-        bairro: bairro,
-        cep: cep,
-        cidade: cidade,
-        uf: uf
+        logradouro,
+        numero,
+        complemento,
+        bairro,
+        cep,
+        cidade,
+        uf
     };
 
     for (let _ in accounts){

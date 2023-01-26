@@ -1,0 +1,10 @@
+db.products.updateOne(
+    {
+        nome: "Galaxy Tab S8"
+    },
+    {
+        $inc: {
+            qtdeEmEstoque: -2
+        }
+    }
+)

@@ -7,8 +7,7 @@ export default function changeUserNameUseCase (email, newName){
             accounts[_].name = newName;
             console.log(accounts[_]);
             return true;
-        }else {
-            return false;
-        }
+        } 
     }
+    return false;
 }
