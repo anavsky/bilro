@@ -1,0 +1,311 @@
+openapi: 3.0.3
+info:
+  title: API de produtos
+  description: API para controlar produtos do sistema Ecomm
+  version: 0.0.1
+externalDocs:
+  description: Link do GitHub
+  url: https://github.com/anavsky/ecomm
+servers: 
+- url: https://63d16adc3f08e4a8ff977c0e.mockapi.io/api/
+  description: API de teste
+paths:
+  /categories:
+    get:
+      tags:
+      - /categories
+      summary: Lista todas as categorias
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+  /categories/{id}:
+    get:
+      tags:
+      - /categories
+      summary: Recupera uma categoria pelo id
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        404:
+          $ref: '#/components/responses/NotFound'
+  /admin/categories:
+    post:
+      tags:
+      - /admin/categories
+      security:
+      - auth: []
+      summary: Insere nova categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  /admin/categories/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    put:
+      tags:
+      - /admin/categories
+      summary: Altera uma categoria pelo id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      
+      responses:
+        200:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags:
+      - /admin/categories
+      summary: Altera o status de uma categoria
+      responses:
+        200:
+          description: Categoria foi alterada
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+      - /admin/categories
+      summary: Apaga categoria pelo id
+      responses:
+        200:
+          description: Categoria foi deletada
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+  /admin/products:
+    post:
+      tags:
+      - /admin/products
+      security:
+      - auth: []
+      summary: Insere novo produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        201:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    get:
+      tags:
+      - /admin/products
+      summary: Lista todos os produtos existentes
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+  /admin/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      tags:
+      - /categories
+      summary: Recupera um produto pelo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        404:
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+      - /admin/products
+      summary: Altera um produto pelo id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        200:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+      - /admin/products
+      summary: Apaga produto pelo id
+      responses:
+        200:
+          description: Produto foi deletado
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+  /products/pricerange:
+    get:
+      parameters:
+      - name: prices
+        in: query
+        schema:
+          type: object
+          properties:
+            min:
+              type: number
+            max:
+              type: number
+        required: true
+      tags:
+      - /products/pricerange
+      summary: Recupera produtos em uma faixa de preços
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          $ref: '#/components/responses/NotFound'
+  /products/category:
+    get:
+      parameters:
+      - name: category
+        in: query
+        schema:
+          type: string
+        required: true
+      tags:
+      - /products/category
+      summary: Recupera produtos de uma determinada categoria
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          $ref: '#/components/responses/NotFound'
+/products/stock:
+    get:
+      parameters:
+      - name: stock
+        in: query
+        schema:
+          type: integer
+        required: true
+      tags:
+      - /products/stock
+      summary: Recupera produtos de acordo com o estoque
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        qtdeEmEstoque:
+          type: integer
+        categoriaId:
+          type: integer
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/Product"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+  responses:
+    Success:
+      description: "Cadastrado com sucesso"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Category"
+    UnauthorizedError:
+      description: "Requisição não autorizada"
+      content:
+        application/json:
+          example: "Não autorizado"
+    NotFound:
+      description: Categoria não encontrada
+      content:
+        application/json:
+          example: "Não encontrado"
+          
+        

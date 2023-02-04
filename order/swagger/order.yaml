@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: API de pedidos
+  description: API para controlar pedidos do sistema Ecomm
+  version: 0.0.1
+externalDocs:
+  description: Link do GitHub
+  url: https://github.com/anavsky/ecomm
+servers: 
+- url: https://mockapi.io/api/
+  description: API de teste
+paths:
+  /order/{id}:
+    get:
+      tags:
+      - /order
+      summary: Recupera um pedido pelo id
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        404:
+          $ref: '#/components/responses/NotFound'
+  /admin/order:
+    post:
+      tags:
+      - /admin/order
+      summary: Insere novo pedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201:
+          $ref: "#/components/responses/Success"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+        quantidade:
+          type: integer
+        desconto:
+          type: number
+        precoUnitario:
+          type: number
+    Endereco:
+      type: object
+      properties:
+        rua:
+          type: string
+        numero:
+          type: string
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+    Order:
+      type: object
+      properties:
+        cpfCliente:
+          type: string
+        enderecoEntrega:
+          type: object
+          items:
+            $ref: "#/components/schemas/Endereco"
+        pedidos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+  responses:
+    Success:
+      description: "Cadastrado com sucesso"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Order"
+    UnauthorizedError:
+      description: "Requisição não autorizada"
+      content:
+        application/json:
+          example: "Não autorizado"
+    NotFound:
+      description: Categoria não encontrada
+      content:
+        application/json:
+          example: "Não encontrado"
+          
+        
