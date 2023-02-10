@@ -10,7 +10,7 @@ servers:
 - url: https://63d16adc3f08e4a8ff977c0e.mockapi.io/api/
   description: API de teste
 paths:
-  /categories:
+  /api/categories:
     get:
       tags:
       - /categories
@@ -22,7 +22,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Categories"
-  /categories/{id}:
+  /api/categories/{id}:
     get:
       tags:
       - /categories
@@ -42,7 +42,7 @@ paths:
                 $ref: "#/components/schemas/Category"
         404:
           $ref: '#/components/responses/NotFound'
-  /admin/categories:
+  /api/admin/categories:
     post:
       tags:
       - /admin/categories
@@ -62,7 +62,7 @@ paths:
           $ref: "#/components/responses/Success"
         401:
           $ref: '#/components/responses/UnauthorizedError'
-  /admin/categories/{id}:
+  /api/admin/categories/{id}:
     parameters:
       - name: id
         in: path
@@ -109,7 +109,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
-  /admin/products:
+  /api/admin/products:
     post:
       tags:
       - /admin/products
@@ -137,7 +137,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Products"
-  /admin/products/{id}:
+  /api/admin/products/{id}:
     parameters:
       - name: id
         in: path
@@ -185,7 +185,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
-  /products/pricerange:
+  /api/products/price-range:
     get:
       parameters:
       - name: prices
@@ -210,7 +210,7 @@ paths:
                 $ref: "#/components/schemas/Products"
         404:
           $ref: '#/components/responses/NotFound'
-  /products/category:
+  /api/products/category:
     get:
       parameters:
       - name: category
@@ -230,7 +230,7 @@ paths:
                 $ref: "#/components/schemas/Products"
         404:
           $ref: '#/components/responses/NotFound'
-/products/stock:
+/api/products/stock:
     get:
       parameters:
       - name: stock
