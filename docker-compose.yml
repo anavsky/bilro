@@ -1,21 +1,21 @@
 version: '3.9'
 services:
-  # product:
-  #   build: ./product
-  #   container_name: ecomm-product
-  #   ports:
-  #     - "3003:3003"
+  product:
+    build: ./product
+    container_name: ecomm-product
+    ports:
+      - "3003:3003"
     
   account:
     build: ./account
     container_name: ecomm-account
     ports:
       - "3002:3002"
-  # finance:
-  #   build: ./finance
-  #   container_name: ecomm-finance
-  #   ports:
-  #     - 3006:3006
+  finance:
+    build: ./finance
+    container_name: ecomm-finance
+    ports:
+      - 3006:3006
       
   mongodb:
     container_name: mongo-ecomm
@@ -28,14 +28,14 @@ services:
     command: mongod --bind_ip=0.0.0.0
     volumes:
       - /data/db:/data/db
-  # mysql:
-  #   container_name: mysql-ecomm
-  #   image: mysql
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: secret
-  #     MYSQL_DATABASE: ecomm-finance
-  #   ports:
-  #     - 3306:3306
-  #   volumes:
-  #     - /data/mysql:/var/lib/mysql
+  mysql:
+    container_name: mysql-ecomm
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: ecomm-finance
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/mysql:/var/lib/mysql

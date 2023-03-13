@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-import users from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import users from '../models/User.js';
 
 // eslint-disable-next-line import/extensions
 import hashPassword from '../middlewares/hashPassword.js';
@@ -46,7 +46,6 @@ class UserController {
     const user = await users.findOne({ email });
     return user || null;
   }
-  
 
   static updateUser = (req, res) => {
     const { id } = req.params;
@@ -73,11 +72,11 @@ class UserController {
   };
 
   static login = (req, res) => {
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
-    //res.status(204).send({ message: 'Usuário logado' });
+    const { _id } = req.user;
+    const token = jwt.sign({ _id }, process.env.TOKEN_SECRET);
+    res.header('Authorization', token);
+    res.status(204).send();
   };
 }
 
 export default UserController;
- 

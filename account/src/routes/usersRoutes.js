@@ -6,11 +6,11 @@ import UserController from '../controllers/usersController.js';
 const router = express.Router();
 
 router
-  .get('/user', UserController.listUsers)
+  .get('/user', passport.authenticate('bearer', { session: false }), UserController.listUsers)
   .get('/user/:id', UserController.listUserById)
   .post('/user', UserController.insertUser)
-  .put('/user/:id', UserController.updateUser)
-  .delete('/user/:id', UserController.deleteUser)
+  .put('/user/:id', passport.authenticate('local', { session: false }), UserController.updateUser)
+  .delete('/user/:id', passport.authenticate('local', { session: false }), UserController.deleteUser)
   .post('/user/login', passport.authenticate('local', { session: false }), UserController.login);
 
 export default router;

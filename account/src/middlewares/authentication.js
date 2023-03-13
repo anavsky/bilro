@@ -1,7 +1,12 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcryptjs';
+import { Strategy as BearerStrategy } from 'passport-http-bearer';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import UserController from '../controllers/usersController.js';
+
+dotenv.config();
 
 async function checkPassword(password, hashedPassword) {
   const validPassword = await bcrypt.compare(password, hashedPassword);
@@ -37,9 +42,20 @@ passport.use(new LocalStrategy({
     }
     return done(null, user);
   } catch (error) {
-    console.log('Erro no sistema')
     return done(error);
   }
 }));
+
+passport.use(new BearerStrategy(
+  async (token, done) => {
+    try {
+      const payload = jwt.verify(token, process.env.TOKEN_SECRET);
+      const user = UserController.findUserEmail(payload.email);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
+  },
+));
 
 export default passport;
