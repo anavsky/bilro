@@ -1,14 +1,11 @@
-import { accounts } from "./createUserAccount.js";
+/* eslint-disable no-restricted-syntax */
+import { accounts } from './createUserAccount.js';
 
-
-export default function searchUserAccountByEmailUseCase (email){
-    for (let _ in accounts){
-
-        if (accounts[_].email === email){
-            return accounts[_].name;
-        }
+export default function searchUserAccountByEmailUseCase(email) {
+  for (const _ in accounts) {
+    if (accounts[_].email === email) {
+      return accounts[_].name;
     }
-    return false;
+  }
+  return false;
 }
-
-

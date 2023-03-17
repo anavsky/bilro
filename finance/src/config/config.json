@@ -8,8 +8,8 @@
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "secret",
+    "database": "ecomm-finance-test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
