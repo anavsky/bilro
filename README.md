@@ -101,3 +101,19 @@ Não implementado.
 
 Não implementado.
 
+
+# Arquitetura de Microserviços
+
+## Padronização ou não das stacks do serviço
+Os microserviços estão separados por funcionalidade e utilizam Javascript e MongoDB ou MySQL. Como são independentes, não há necessidade de padronizar a stack do banco de dados entre os serviços.
+## Solução para service discovery
+No caso desta aplicação, o service discovery é utilizado no docker compose, quando o serviço de finance usa o container do mysql como banco de dados.
+## Aspectos de segurança 
+A aplicação conta com autenticação usando tokens JWT e criptografia das senhas no banco de dados. Uma outra forma de aumentar a segurança seria através do uso de API Gateway, porém esse aspecto não foi implementado.
+## Tecnologias a adotar para deploy e build
+Para fazer o deploy da aplicação pode ser utilizado o docker. Cada microserviço possui uma imagem separada que pode ser subida de forma independente.
+O build pode ser feito de forma gratuita através do Travis, fazendo uma configuração do Github.
+## Tolerância a falhas em aplicações síncronas (circuit breaker, cache)
+Para este serviço, o uso de cache poderia ser uma solução no caso de falhas. Por exemplo, caso o usuário estivesse cadastrando um novo usuário e houvesse falha no servidor, o cache poderia salvar as informações que o usuário já digitou para que não fosse necessário inserí-las novamente.
+## Comunicação assíncrona
+Pode ser implementado um serviço de mensageria para realizar a comunicação assíncrona entre os microserviços, como o RabbitMQ ou Kafka. Dessa forma, o serviço de orders poderia enviar a nota fiscal diretamente para o serviço de payments (finance).
