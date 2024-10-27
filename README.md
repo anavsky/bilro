@@ -4,10 +4,10 @@ Projeto de Ecommerce criando durante o programa LevelUp da Alura
 
 # Os Doze Fatores
 
-## I. Base de Código :heavy_check_mark:
+## I. Base de Código :x:
 
 Uma base de código com rastreamento utilizando controle de revisão, muitos deploys
-O código da aplicação está hospedado no GitHub e todo o desenvolvimento está sendo feito de forma incremental, separado por branches.
+O código da aplicação está hospedado no GitHub e todo o desenvolvimento está sendo feito de forma incremental, separado por branches. Entretanto todos os serviços estão em um único repositório, dado o tamanho da aplicação.
 
 ## II. Dependências :heavy_check_mark:
 
