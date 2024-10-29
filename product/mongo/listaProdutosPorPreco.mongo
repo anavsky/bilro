@@ -1,4 +1,0 @@
-db.products.find(
-    {"precoUnitario": {$gte: 1000, $lte: 2000}},
-    {"nome": 1, "precoUnitario": 1}
-)

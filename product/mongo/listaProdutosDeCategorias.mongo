@@ -1,3 +1,0 @@
-db.products.find(
-    { "$or": [ {"categoria": "LIVROS"}, {"CATEGORIA": "CELULARES"} ] }
-) 

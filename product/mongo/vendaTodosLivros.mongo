@@ -1,4 +1,0 @@
-db.products.updateMany(
-    {"categoria": "LIVROS"},
-    {$set: {"qtdeEmEstoque": 0}}
-) 
