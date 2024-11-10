@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: Rendeiras API
+  description: |-
+    Esta é uma API criada para o **Projeto Rendeiras**.
+    
+    Esta API é responsável por requisições feitas para **Rendeiras**.
+  version: 0.0.1
+servers: 
+  - url: https://65439d5501b5e279de20aa31.mockapi.io/api/
+    description: API de teste
+paths:
+  /rendeiras:
+    get:
+      tags:
+        - get
+      summary: Busca todas as rendeiras
+      description: Retorna todas as rendeiras cadastradas no banco.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rendeiras'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - post
+      summary: Cria rendeira
+      description: Cria registro de rendeira e salva no banco de dados.
+      responses:
+        '201':
+          description: Rendeira criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rendeiras'
+        '500':
+          description: Internal Server Error
+          
+  /rendeiras/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - get
+      summary: Busca rendeira pelo ID
+      description: Detalha uma rendeira pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rendeiras'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - patch
+      summary: Atualiza dados da rendeira
+      description: Atualiza dados da rendeira e salva o banco de dados.
+      responses:
+        '200':
+          description: Rendeira atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rendeiras'
+        '404':
+          description: Rendeira não encontrada
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - delete
+      summary: Deleta rendeira
+      description: Deleta uma rendeira do banco de dados.
+      responses:
+        '204':
+          description: Redeira deletada com sucesso
+        '404':
+          description: Rendeira não encontrada
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Rendeiras:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nome:
+          type: string
+          example: Dona Odete
+        email:
+          type: string
+          example: odete@email.com
+        foto:
+          type: string
+          example: website.com/foto.jpg
+        bio:
+          type: string
+          example: "Dona Odete é moradora da Rua das Casas Azuis. Produz renda desde os 10 anos de idade. Aprendeu com sua vó Dona Teca."

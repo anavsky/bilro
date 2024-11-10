@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const midiasDoMeuProcessoSchema = new mongoose.Schema(
+const midiaFromProcessSchema = new mongoose.Schema(
   {
     idRendeira: { type: String },
     idMeuProcesso: { type: String, required: true },
@@ -12,6 +12,6 @@ const midiasDoMeuProcessoSchema = new mongoose.Schema(
   },
 );
 
-const midiasDoMeuProcesso = mongoose.model('midiasDoMeuProcesso', midiasDoMeuProcessoSchema);
+const midiaFromProcess = mongoose.model('midiaFromProcess', midiaFromProcessSchema);
 
-export default midiasDoMeuProcesso;
+export default midiaFromProcess;

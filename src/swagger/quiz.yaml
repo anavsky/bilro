@@ -1,0 +1,289 @@
+openapi: 3.0.3
+info:
+  title: Rendeiras API
+  description: |-
+    Esta é uma API criada para o **Projeto Rendeiras**.
+    
+    Esta API é responsável por requisições feitas para **Rendeiras**.
+  version: 0.0.1
+servers: 
+  - url: https://656678a164fcff8d730ed292.mockapi.io/api/
+    description: API de teste
+paths:
+  /categoria:
+    get:
+      tags:
+        - categoria
+      summary: Busca categorias
+      description: Retorna categorias cadastradas.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - categoria
+      summary: Cria categoria
+      description: Cria registro de categoria e salva no banco de dados.
+      responses:
+        '201':
+          description: Categoria criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '500':
+          description: Internal Server Error
+          
+  /categoria/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - categoria
+      summary: Busca categoria pelo ID
+      description: Detalha categoria pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - categoria
+      summary: Atualiza dados da categoria
+      description: Atualiza dados da categoria e salva o banco de dados.
+      responses:
+        '200':
+          description: Categoria atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '404':
+          description: Categoria não encontrada
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - categoria
+      summary: Deleta categoria
+      description: Deleta um categoria do banco de dados.
+      responses:
+        '204':
+          description: Categoria deletada com sucesso
+        '404':
+          description: Categoria não encontrada
+        '500':
+          description: Internal Server Error
+  /questao:
+    get:
+      tags:
+        - questao
+      summary: Busca questao
+      description: Retorna questoes cadastradas.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questao'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - questao
+      summary: Cria questao
+      description: Cria registro de questao e salva no banco de dados.
+      responses:
+        '201':
+          description: Questao criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questao'
+        '500':
+          description: Internal Server Error
+
+  /questao/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - questao
+      summary: Busca questao pelo ID
+      description: Detalha questao pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questao'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - questao
+      summary: Atualiza dados da questao
+      description: Atualiza dados da questao e salva o banco de dados.
+      responses:
+        '200':
+          description: Questao atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questao'
+        '404':
+          description: Questao não encontrada
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - questao
+      summary: Deleta questao
+      description: Deleta um questao do banco de dados.
+      responses:
+        '204':
+          description: Questao deletada com sucesso
+        '404':
+          description: Questao não encontrada
+        '500':
+          description: Internal Server Error
+  /alternativa:
+    get:
+      tags:
+        - alternativa
+      summary: Busca alternativa
+      description: Retorna alternativas cadastradas.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alternativa'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - alternativa
+      summary: Cria alternativa
+      description: Cria registro de alternativa e salva no banco de dados.
+      responses:
+        '201':
+          description: Alternativa criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alternativa'
+        '500':
+          description: Internal Server Error
+  /alternativa/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - alternativa
+      summary: Busca alternativa pelo ID
+      description: Detalha alternativa pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alternativa'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - alternativa
+      summary: Atualiza dados da alternativa
+      description: Atualiza dados da alternativa e salva o banco de dados.
+      responses:
+        '200':
+          description: Alternativa atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alternativa'
+        '404':
+          description: Alternativa não encontrada
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - alternativa
+      summary: Deleta alternativa
+      description: Deleta uma alternativa do banco de dados.
+      responses:
+        '204':
+          description: Alternativa deletada com sucesso
+        '404':
+          description: Alternativa não encontrada
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        titulo:
+          type: string
+          example: Geral
+    Questao:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        descricao:
+          type: string
+          example: Este e exemplo de descricao
+        imagem:
+          type: string
+          example: https://loremflickr.com/640/480/business
+        categoria:
+          type: string
+          example: Geral
+    Alternativa:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        descricao:
+          type: string
+          example: Este e exemplo de descricao
+        imagem:
+          type: string
+          example: https://loremflickr.com/640/480/business
+        questao:
+          type: string
+          example: Geral

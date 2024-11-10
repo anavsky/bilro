@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import RendeiraController from '../controllers/rendeirasController.js';
+import UserController from '../controllers/usersController.js';
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (email, done) => {
   try {
-    const user = await RendeiraController.findUserEmail(email);
+    const user = await UserController.findUserEmail(email);
     done(null, user);
   } catch (err) {
     done(err);
@@ -32,7 +32,7 @@ passport.use(new LocalStrategy({
   session: false,
 }, async (email, password, done) => {
   try {
-    const user = await RendeiraController.findUserEmail(email); // find the user by email
+    const user = await UserController.findUserEmail(email); // find the user by email
     if (!user) {
       return done(null, false, { message: 'Invalid email or password' });
     }
@@ -50,7 +50,7 @@ passport.use(new BearerStrategy(
   async (token, done) => {
     try {
       const payload = jwt.verify(token, process.env.TOKEN_SECRET);
-      const user = RendeiraController.findUserEmail(payload.email);
+      const user = UserController.findUserEmail(payload.email);
       done(null, user);
     } catch (err) {
       done(err);

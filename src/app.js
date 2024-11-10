@@ -6,7 +6,7 @@ import db from './config/dbConnect.js';
 import routes from './routes/index.js';
 import './middlewares/authentication.js';
 
-const swaggerDocument = YAML.load('src/account/swagger/account.yaml');
+const swaggerDocument = YAML.load('./swagger/account.yaml');
 
 db.on('error', console.log.bind(console, 'Erro de conexão'));
 db.once('open', () => {

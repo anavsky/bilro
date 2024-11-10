@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Rendeiras API
+  description: |-
+    Esta é uma API criada para o **Projeto Rendeiras**.
+    
+    Esta API é responsável por requisições feitas para **Rendeiras**.
+  version: 0.0.1
+servers: 
+  - url: https://65439d5501b5e279de20aa31.mockapi.io/api/
+    description: API de teste
+paths:
+  /produto:
+    get:
+      tags:
+        - get
+      summary: Busca todos os produtos
+      description: Retorna todos os produtos cadastrados no banco.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - post
+      summary: Cria produto
+      description: Cria registro de produto e salva no banco de dados.
+      responses:
+        '201':
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '500':
+          description: Internal Server Error
+          
+  /produto/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - get
+      summary: Busca produto pelo ID
+      description: Detalha um produto pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - patch
+      summary: Atualiza dados do produto
+      description: Atualiza dados do produto e salva o banco de dados.
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - delete
+      summary: Deleta produto
+      description: Deleta um produto do banco de dados.
+      responses:
+        '204':
+          description: Produto deletado com sucesso
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Produto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nome:
+          type: string
+          example: Renda tule de organza 100% poliester branca (5,0 cm - 6,9m)
+        descricao:
+          type: string
+          example: Comprimento - 6,9 metros Largura - 5,0 centímetros Composição - 100% poliéster
+        tamanho:
+          type: string
+          example: P/M/G
+        infoadicionais:
+          type: string
+          example: Peso de 150g
+        categoria:
+          type: string
+          example: Renda

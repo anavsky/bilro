@@ -1,3 +1,3 @@
 # BilroArte
 
-Projeto BilroArte para auxiliar as rendeiras da Raposa - MA.
+Projeto BilroArte para auxiliar as users da Raposa - MA.

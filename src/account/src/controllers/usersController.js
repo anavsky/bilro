@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import users from '../../../models/Rendeira.js';
+import users from '../../../models/User.js';
 
 // eslint-disable-next-line import/extensions
 import hashPassword from '../middlewares/hashPassword.js';
