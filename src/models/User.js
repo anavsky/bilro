@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const rendeiraSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     idRendeira: { type: String },
     nome: { type: String, required: true },
@@ -37,6 +37,6 @@ const rendeiraSchema = new mongoose.Schema(
   },
 );
 
-const rendeiras = mongoose.model('rendeiras', rendeiraSchema);
+const users = mongoose.model('users', userSchema);
 
-export default rendeiras;
+export default users;
