@@ -1,52 +1,52 @@
-import products from '../models/Product.js';
+import midiaFromProcess from '../models/MidiaFromProcess.js';
 
-class ProductController {
-  static listProducts = (req, res) => {
-    products.find((err, produtos) => res.status(200).json(produtos));
+class midiaController {
+  static listMidia = (req, res) => {
+    midiaFromProcess.find((err, midias) => res.status(200).json(midias));
   };
 
-  static insertProduct = (req, res) => {
-    const product = new products(req.body);
+  static insertMidia = (req, res) => {
+    const midia = new midiaFromProcess(req.body);
 
-    product.save((err) => {
+    midia.save((err) => {
       if (err) {
-        res.status(500).send({ message: `${err.message} - falha ao cadastrar produto.` });
+        res.status(500).send({ message: `${err.message} - falha ao cadastrar midia.` });
       } else {
-        res.status(201).send(product.toJSON());
+        res.status(201).send(midia.toJSON());
       }
     });
   };
 
-  static listProductById = (req, res) => {
+  static listMidiaById = (req, res) => {
     const { id } = req.params;
 
-    products.findById(id, (err, produtos) => {
+    midiaFromProcess.findById(id, (err, midias) => {
       if (err) {
-        res.status(400).send({ message: `${err.message} - Id do Produto não localizado.` });
+        res.status(400).send({ message: `${err.message} - Midia não localizada.` });
       } else {
-        res.status(200).send(produtos);
+        res.status(200).send(midias);
       }
     });
   };
 
-  static updateProduct = (req, res) => {
+  static updateMidia = (req, res) => {
     const { id } = req.params;
 
-    products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    midiaFromProcess.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err) {
-        res.status(200).send({ message: 'Produto atualizado com sucesso' });
+        res.status(200).send({ message: 'Midia atualizada com sucesso' });
       } else {
         res.status(500).send({ message: err.message });
       }
     });
   };
 
-  static deleteProduct = (req, res) => {
+  static deleteMidia = (req, res) => {
     const { id } = req.params;
 
-    products.findByIdAndDelete(id, (err) => {
+    midiaFromProcess.findByIdAndDelete(id, (err) => {
       if (!err) {
-        res.status(200).send({ message: 'Produto removido com sucesso' });
+        res.status(200).send({ message: 'Midia removida com sucesso' });
       } else {
         res.status(500).send({ message: err.message });
       }
@@ -54,4 +54,4 @@ class ProductController {
   };
 }
 
-export default ProductController;
+export default midiaController;
