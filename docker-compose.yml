@@ -1,24 +1,7 @@
 version: '3.9'
-services:
-  product:
-    build: ./product
-    container_name: ecomm-product
-    ports:
-      - "3003:3003"
-    
-  account:
-    build: ./account
-    container_name: ecomm-account
-    ports:
-      - "3002:3002"
-  finance:
-    build: ./finance
-    container_name: ecomm-finance
-    ports:
-      - 3006:3006
-      
+services:      
   mongodb:
-    container_name: mongo-ecomm
+    container_name: mongo-bilro
     image: mongo:5.0
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
@@ -29,12 +12,12 @@ services:
     volumes:
       - /data/db:/data/db
   mysql:
-    container_name: mysql-ecomm
+    container_name: mysql-bilro
     image: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: ecomm-finance
+      MYSQL_DATABASE: bilro-finance
     ports:
       - 3306:3306
     volumes:
