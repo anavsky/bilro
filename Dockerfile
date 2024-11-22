@@ -1,7 +1,7 @@
 FROM node:18-alpine
-WORKDIR /account
+WORKDIR /bilro
 COPY . .
 RUN npm config set strict-ssl false
 RUN npm install
-EXPOSE 3002
+EXPOSE 3000
 ENTRYPOINT npm start
