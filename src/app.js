@@ -6,7 +6,7 @@ import db from './config/dbConnect.js';
 import routes from './routes/index.js';
 import './middlewares/authentication.js';
 
-const swaggerDocument = YAML.load('./swagger/account.yaml');
+const swaggerDocument = YAML.load('./src/swagger/rendeiras.yaml');
 
 db.on('error', console.log.bind(console, 'Erro de conexão'));
 db.once('open', () => {
@@ -15,10 +15,11 @@ db.once('open', () => {
 
 const app = express();
 
+// app.use(session({...}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/account/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/users/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 routes(app);
 

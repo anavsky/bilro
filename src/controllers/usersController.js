@@ -22,6 +22,7 @@ class UserController {
         res.status(500).send({ message: `${err.message} - falha ao cadastrar usuário.` });
       } else {
         res.status(201).send(user.toJSON());
+        console.log('Usuário cadastrado com sucesso');
       }
     });
   };
