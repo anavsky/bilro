@@ -7,10 +7,10 @@ info:
     Esta API é responsável por requisições feitas para **Rendeiras**.
   version: 0.0.1
 servers: 
-  - url: https://65439d5501b5e279de20aa31.mockapi.io/api/
+  - url: https://localhost:3000/
     description: API de teste
 paths:
-  /rendeiras:
+  /users:
     get:
       tags:
         - get
@@ -30,6 +30,13 @@ paths:
         - post
       summary: Cria rendeira
       description: Cria registro de rendeira e salva no banco de dados.
+      requestBody:
+        description: Envio de cadastro da rendeira
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rendeiras'
       responses:
         '201':
           description: Rendeira criada com sucesso
@@ -40,7 +47,7 @@ paths:
         '500':
           description: Internal Server Error
           
-  /rendeiras/{id}:
+  /users/{id}:
     parameters:
     - name: id
       in: path

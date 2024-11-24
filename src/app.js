@@ -15,6 +15,7 @@ db.once('open', () => {
 
 const app = express();
 
+// app.use(session({...}));
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -1,6 +1,6 @@
 import midiaFromProcess from '../models/MidiaFromProcess.js';
 
-class midiaController {
+class MidiaController {
   static listMidia = (req, res) => {
     midiaFromProcess.find((err, midias) => res.status(200).json(midias));
   };
@@ -54,4 +54,4 @@ class midiaController {
   };
 }
 
-export default midiaController;
+export default MidiaController;
