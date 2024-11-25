@@ -2,9 +2,9 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import passport from 'passport';
-import db from './config/dbConnect.js';
-import routes from './routes/index.js';
-import './middlewares/authentication.js';
+import db from '../src/config/dbConnect.js';
+import routes from '../src/routes/index.js';
+import '../src/middlewares/authentication.js';
 
 const swaggerDocument = YAML.load('./src/swagger/rendeiras.yaml');
 
