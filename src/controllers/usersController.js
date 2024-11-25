@@ -16,15 +16,14 @@ class UserController {
 
   static insertUser = async (req, res) => {
     const user = new users(req.body);
-    user.password = await hashPassword(req.body.password);
-    user.save((err) => {
-      if (err) {
-        res.status(500).send({ message: `${err.message} - falha ao cadastrar usuário.` });
-      } else {
-        res.status(201).send(user.toJSON());
-        console.log('Usuário cadastrado com sucesso');
-      }
-    });
+    user.password = await hashPassword(req.body.senha);
+    try {
+      await user.save();
+      res.status(201).send(user.toJSON());
+      console.log('Usuário cadastrado com sucesso');
+    } catch (err) {
+      res.status(500).send({ message: `${err.message} - falha ao cadastrar usuário.` });
+    }
   };
 
   static listUserById = (req, res) => {
