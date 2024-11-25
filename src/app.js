@@ -19,7 +19,7 @@ const app = express();
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/users/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 routes(app);
 

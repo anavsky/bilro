@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Rendeiras API
+  title: BilroArte API
   description: |-
-    Esta é uma API criada para o **Projeto Rendeiras**.
+    Esta é uma API criada para o **Projeto BilroArte**.
     
-    Esta API é responsável por requisições feitas para **Rendeiras**.
+    Esta API é responsável por requisições feitas para **BilroArte**.
   version: 0.0.1
 servers: 
-  - url: https://localhost:3000/
+  - url: http://localhost:3000/
     description: API de teste
 paths:
-  /users:
+  /user:
     get:
       tags:
-        - get
+        - rendeira
       summary: Busca todas as rendeiras
       description: Retorna todas as rendeiras cadastradas no banco.
       responses:
@@ -27,7 +27,7 @@ paths:
           description: Internal Server Error
     post:
       tags:
-        - post
+        - rendeira
       summary: Cria rendeira
       description: Cria registro de rendeira e salva no banco de dados.
       requestBody:
@@ -47,7 +47,7 @@ paths:
         '500':
           description: Internal Server Error
           
-  /users/{id}:
+  /user/{id}:
     parameters:
     - name: id
       in: path
@@ -56,7 +56,7 @@ paths:
       required: true
     get:
       tags:
-        - get
+        - rendeira
       summary: Busca rendeira pelo ID
       description: Detalha uma rendeira pelo ID buscado.
       responses:
@@ -70,7 +70,7 @@ paths:
           description: Internal Server Error
     patch:
       tags:
-        - patch
+        - rendeira
       summary: Atualiza dados da rendeira
       description: Atualiza dados da rendeira e salva o banco de dados.
       responses:
@@ -86,7 +86,7 @@ paths:
           description: Internal Server Error
     delete:
       tags:
-        - delete
+        - rendeira
       summary: Deleta rendeira
       description: Deleta uma rendeira do banco de dados.
       responses:
@@ -94,6 +94,274 @@ paths:
           description: Redeira deletada com sucesso
         '404':
           description: Rendeira não encontrada
+        '500':
+          description: Internal Server Error
+
+  /product:
+    get:
+      tags:
+        - produto
+      summary: Busca todos os produtos
+      description: Retorna todos os produtos cadastrados no banco.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - produto
+      summary: Cria produto
+      description: Cria registro de produto e salva no banco de dados.
+      requestBody:
+        description: Envio de cadastro da rendeira
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rendeiras'
+      responses:
+        '201':
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '500':
+          description: Internal Server Error
+          
+  /product/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - produto
+      summary: Busca produto pelo ID
+      description: Detalha um produto pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - produto
+      summary: Atualiza dados do produto
+      description: Atualiza dados do produto e salva o banco de dados.
+      requestBody:
+        description: Envio de cadastro da rendeira
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rendeiras'
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - produto
+      summary: Deleta produto
+      description: Deleta um produto do banco de dados.
+      responses:
+        '204':
+          description: Produto deletado com sucesso
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Internal Server Error
+
+  /order:
+    get:
+      tags:
+        - pedido
+      summary: Busca todos os pedidos
+      description: Retorna todos os pedidos cadastrados no banco.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - pedido
+      summary: Cria pedido
+      description: Cria registro de pedido e salva no banco de dados.
+      requestBody:
+        description: Envio de cadastro do pedido
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pedido'
+      responses:
+        '201':
+          description: Pedido criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '500':
+          description: Internal Server Error
+          
+  /order/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - pedido
+      summary: Busca pedido pelo ID
+      description: Detalha um pedido pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - pedido
+      summary: Atualiza dados do pedido
+      description: Atualiza dados do pedido e salva no banco de dados.
+      responses:
+        '200':
+          description: Pedido atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '404':
+          description: Pedido não encontrado
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - pedido
+      summary: Deleta pedido
+      description: Deleta um pedido do banco de dados.
+      responses:
+        '204':
+          description: Pedido deletado com sucesso
+        '404':
+          description: Pedido não encontrado
+        '500':
+          description: Internal Server Error
+
+  /midia:
+    get:
+      tags:
+        - midias do processo
+      summary: Busca todas as midias do processo
+      description: Retorna todas as midias do processo cadastradas no banco.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Midia'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - midias do processo
+      summary: Cria midias do processo
+      description: Cria registro de midias do processo e salva no banco de dados.
+      requestBody:
+        description: Envio de cadastro do midias do processo
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Midia'
+      responses:
+        '201':
+          description: Midia criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Midia'
+        '500':
+          description: Internal Server Error
+          
+  /midia/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - midias do processo
+      summary: Busca midias do processo pelo ID
+      description: Detalha midias do processo pelo ID buscado.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Midia'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - midias do processo
+      summary: Atualiza dados de midias do processo
+      description: Atualiza dados de midias do processo e salva no banco de dados.
+      responses:
+        '200':
+          description: Midia atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Midia'
+        '404':
+          description: Midia não encontrada
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - midias do processo
+      summary: Deleta midias do processo
+      description: Deleta midias do processo do banco de dados.
+      responses:
+        '204':
+          description: Midia deletada com sucesso
+        '404':
+          description: Midia não encontrada
         '500':
           description: Internal Server Error
 components:
@@ -116,3 +384,150 @@ components:
         bio:
           type: string
           example: "Dona Odete é moradora da Rua das Casas Azuis. Produz renda desde os 10 anos de idade. Aprendeu com sua vó Dona Teca."
+        minhaHistoria: 
+          type: string
+          example: website.com/foto.jpg,
+        possuiLojaFisica:
+          type: boolean
+          example: false
+        participaDeAssociacao:
+          type: boolean
+          example: false
+        senha: 
+          type: string
+          example: senha123
+        celular:  
+          type: string
+          example: 9898887777
+        instagram: 
+          type: string
+          example: instagram.com/rendeira
+        facebook: 
+          type: string
+          example: facebook.com/rendeira
+        cpf: 
+          type: string
+          example: 11122233350
+        cnpj: 
+          type: string
+          example: 111111111.33333333-90
+        banco: 
+          type: string
+          example: Banco X
+        tipoDeConta: 
+          type: string
+          example: corrente
+        conta: 
+          type: string
+          example: 1111-0
+        agencia: 
+          type: string
+          example: a1
+        cep: 
+          type: string
+          example: 4444-000
+        endereco: 
+          type: string
+          example: Rua Tals, Casa 2
+        bairro: 
+          type: string
+          example: Bairro
+        complemento: 
+          type: string
+          example: sem
+        meuProcesso: 
+          type: string
+          example: website.com/meuprocesso.jpg
+    
+    Pedido:
+      type: object
+      properties:
+        idPedido:
+          type: string
+          format: uuid
+        total:
+          type: number
+          example: 12
+        taxaDeServico:
+          type: number
+          example: 3
+        frete:
+          type: number
+          example: 2.50
+        cliente:
+          type: string
+          example: Cli Ente
+        status: 
+          type: string
+          example: recebido
+
+    Midia:
+      type: object
+      properties:
+        idMidia:
+          type: string
+          format: uuid
+        idMeuProcesso:
+          type: string
+          example: uuid
+        urlMidia:
+          type: string
+          example: youtube.com/midia
+        tipoDaMidia: 
+          type: string
+          example: video
+          
+    Produto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nome:
+          type: string
+          example: Renda tule de organza 100% poliester branca (5,0 cm - 6,9m)
+        descricao:
+          type: string
+          example: Comprimento - 6,9 metros Largura - 5,0 centímetros Composição - 100% poliéster
+        categoria:
+          type: string
+          example: Renda
+        material:
+          type: string
+          example: renda poliester
+        subcategoria:
+          type: string
+          example: Renda
+        disponivelSobEncomenda:
+          type: boolean
+          example: true
+        precoUnitario:
+          type: number
+          example: 100
+        quantidadeEmEstoque:
+          type: number
+          example: 7
+        quantidadeMinima:
+          type: number
+          example: 1
+        prazoDeProducao:
+          type: number
+          example: 10
+        largura:
+          type: number
+          example: 0.5
+        altura:
+          type: number
+          example: 100
+        comprimento:
+          type: number
+          example: 6.9
+        peso:
+          type: number
+          example: 100
+        tamanhoPadrao:
+          type: number
+          example: 100
+        cor:
+          type: string
+          example: branco
