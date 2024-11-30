@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "dev": "nodemon server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose ./test",
-    "vercel-build": "node server.js"
+    "vercel-build": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
